@@ -12,7 +12,7 @@ class One_liner(models.Model):
     one_liner_text = models.TextField()
     pub_date = models.DateField('one_liner date')
     create_date = models.DateTimeField('created at date', auto_now_add=True, blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE )
     one_liner_count = models.IntegerField(default=0)
 
 
