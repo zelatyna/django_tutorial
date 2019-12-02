@@ -5,10 +5,10 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'telegram_uuid4')
+        fields = ('username', 'email', 'phone_number')
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'telegram_uuid4')
+        fields = ('username', 'email', 'phone_number')
