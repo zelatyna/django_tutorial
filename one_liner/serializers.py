@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'telegram_uuid4', 'updates']
+        fields = ['id', 'username', 'phone_number', 'updates']
 
 class OneLinerSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -26,7 +26,7 @@ class OneLinerSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = One_liner
-        fields = ['pub_date', 'one_liner_text', 'author', 'author']
+        fields = ['pub_date', 'one_liner_text', 'author']
 
     def create(self, validated_data):
         """

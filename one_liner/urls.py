@@ -17,5 +17,5 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    url(r'^api-token-auth/', rest_views.obtain_auth_token)
+    url(r'^api-token-auth/', rest_views.obtain_auth_token),
 ]

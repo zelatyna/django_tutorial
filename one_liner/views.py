@@ -7,13 +7,9 @@ from rest_framework.response import Response
 from rest_framework import permissions
 
 
-from django.contrib.auth.models import User
-
-
 class UserList(generics.ListAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
-
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = CustomUser.objects.all()
@@ -26,13 +22,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return One_liner.objects.order_by('-pub_date')[:10]
-
-# class UserViewSet(viewsets.ModelViewSet):
-#     """
-#     API endpoint that allows users to be viewed or edited.
-#     """
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
 
 
 class UpdatesList(mixins.ListModelMixin,
