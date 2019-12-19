@@ -38,14 +38,6 @@ class UpdatesList(mixins.ListModelMixin,
     #     serializer.save(author=self.request.user)
 
     def post(self, request, *args, **kwargs):
-        # data_cp = request.data.copy()
-        # serializer = self.get_serializer(data=data_cp)
-        # user_id = data_cp.pop('user_id')
-        # if isinstance(user_id, list):
-        #     user_id = int(user_id[0])
-        # elif type(user_id) == 'str':
-        #     user_id = int(user_id)
-        # data_cp['user_id'] = user_id
         serializer = self.get_serializer(data=request.data)
 
         if not serializer.is_valid():
