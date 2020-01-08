@@ -125,7 +125,7 @@ class One_liner(models.Model):
     pub_date = models.DateField('one_liner date')
     create_date = models.DateTimeField('created at date', auto_now_add=True, blank=True)
     author = models.ForeignKey('CustomUser', related_name='updates', on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='images')
+    update_image = models.ImageField(upload_to='images', blank=True, null=True)
     one_liner_count = models.IntegerField(default=0)
 
     def __str__(self):

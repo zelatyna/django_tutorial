@@ -104,9 +104,10 @@ admin.site.unregister(Group)
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    fields = ['pub_date', 'author', 'one_liner_text']
+    fields = ['pub_date', 'author', 'one_liner_text', 'update_image']
     list_display = ('pub_date', 'author', 'one_liner_text')
     list_filter = ['pub_date']
+
 
 
 # admin.site.register(CustomUser, CustomUserAdmin)

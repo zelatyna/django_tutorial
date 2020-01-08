@@ -26,7 +26,7 @@ class OneLinerSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = One_liner
-        fields = ['pub_date', 'one_liner_text', 'author']
+        fields = ['pub_date', 'one_liner_text', 'author', 'update_image']
 
 
     def create(self, validated_data):
