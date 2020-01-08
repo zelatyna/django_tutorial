@@ -11,8 +11,8 @@ urlpatterns = [
 #app_name= 'one_liner'
 urlpatterns += [
     path('', views.IndexView.as_view(), name='index'),
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('users/', views.UserDetail.as_view()),
+    #path('users/<int:pk>/', views.UserDetail.as_view()),
     path('updates/', views.UpdatesList.as_view())
 ]
 

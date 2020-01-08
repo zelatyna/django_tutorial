@@ -5,15 +5,25 @@ from rest_framework import viewsets, status
 from rest_framework import mixins, generics
 from rest_framework.response import Response
 from rest_framework import permissions
+from rest_framework.exceptions import NotFound
 
 
 class UserList(generics.ListAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
-class UserDetail(generics.RetrieveAPIView):
-    queryset = CustomUser.objects.all()
+class UserDetail(generics.ListAPIView):
+
     serializer_class = UserSerializer
+    def get_queryset(self):
+        phone_number =  self.request.query_params.get('phone_number', None)
+        if phone_number is not None:
+            queryset = CustomUser.objects.all()
+            queryset = queryset.filter(phone_number=phone_number)
+
+            return queryset
+        else:
+            raise NotFound()
 
 class IndexView(generic.ListView):
     template_name = 'one_liner/index.html'
@@ -38,6 +48,7 @@ class UpdatesList(mixins.ListModelMixin,
     #     serializer.save(author=self.request.user)
 
     def post(self, request, *args, **kwargs):
+        print("DATA" , request.data)
         serializer = self.get_serializer(data=request.data)
 
         if not serializer.is_valid():
