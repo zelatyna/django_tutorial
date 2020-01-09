@@ -26,12 +26,12 @@ class UserDetail(generics.ListAPIView):
             raise NotFound()
 
 class IndexView(generic.ListView):
-    template_name = 'one_liner/index.html'
+    template_name = 'one_liner/update_view.html'
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
         """Return the last five published questions."""
-        return One_liner.objects.order_by('-pub_date')[:10]
+        return One_liner.objects.order_by('-pub_date')[:15]
 
 
 class UpdatesList(mixins.ListModelMixin,
