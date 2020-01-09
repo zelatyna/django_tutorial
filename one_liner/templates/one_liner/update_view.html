@@ -1,0 +1,42 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/about.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/slicknav.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/nivo-lightbox.css' %}">
+
+
+
+
+<section id="services" class="services section-padding">
+    <h2 class="section-title wow flipInX" data-wow-delay="0.4s">Magda/Micheal</h2>
+    <div class="container">
+{% if latest_question_list %}
+
+    <div class="row">
+    {% for question in latest_question_list %}
+        <div class="col-md-6 col-lg-3 col-xs-12">
+            <div class="services-item wow fadeInDown" data-wow-delay="0.3s">
+              <div class="services-content">
+                  {% if question.update_image %}
+                    <img id="backgroundimage" style='height: 100%; width: 100%; object-fit: contain' src="{{ question.update_image.url }}" border="0" alt="ups">
+                    <p>{{ question.update_image.url }}</p>
+                  {% endif %}
+                <h3><a href="#">{{ question.pub_date }}</a></h3>
+                <p>{{ question.one_liner_text }}</p>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No updates are available.</p>
+{% endif %}
+    </div>
+</section>
+
+
