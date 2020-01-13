@@ -6,7 +6,7 @@ from rest_framework import mixins, generics
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework.exceptions import NotFound
-
+import numpy as np
 
 class UserList(generics.ListAPIView):
     queryset = CustomUser.objects.all()
@@ -29,9 +29,23 @@ class IndexView(generic.ListView):
     template_name = 'one_liner/update_view.html'
     context_object_name = 'latest_question_list'
 
-    def get_queryset(self):
+    def get_queryset(self, column_count=4, max_items=20):
         """Return the last five published questions."""
-        return One_liner.objects.order_by('-pub_date')[:15]
+
+        qs = One_liner.objects.order_by('-pub_date')[:max_items]
+
+        #reorder the result items to be displayed from left to right in masonry display
+        rows_count = int(max_items/column_count)
+        index_matrix = np.concatenate((np.arange(len(qs)), (-1)*np.ones(max_items - len(qs)))).reshape(rows_count, column_count)
+        index_matrix = np.matrix(index_matrix)
+        index_list = index_matrix.transpose().reshape(1,rows_count*column_count).tolist()[0]
+        index_list = [x for x in index_list if int(x) != -1]
+        reordered =  [None] * len(qs)
+        for id, item in enumerate(qs):
+            reordered[index_list.index(id)] = item
+
+
+        return reordered
 
 
 class UpdatesList(mixins.ListModelMixin,
