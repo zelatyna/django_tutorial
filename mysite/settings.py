@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'polls.apps.PollsConfig',
     'one_liner.apps.OneLinerConfig', #extend defualt user model
 ]
 
