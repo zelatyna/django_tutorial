@@ -136,3 +136,7 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'one_liner.CustomUser'
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
