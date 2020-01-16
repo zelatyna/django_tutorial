@@ -1,0 +1,31 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'one_liner/style.css' %}">
+
+
+
+
+<div class="wrapper">
+    <div class="title">
+    <h2>Magda and Micheal's digital diary</h2>
+    </div>
+    <div class="masonry" >
+{% if latest_question_list %}
+    {% for question in latest_question_list %}
+         <div class="item">
+                  {% if question.update_image %}
+                    <img src="{{ question.update_image.url }}" border="0" alt="ups">
+                  {% endif %}
+             <div class="date"><h3>{{ question.pub_date }} by {{question.author}}</h3></div>
+             <div class="text">{{ question.one_liner_text }}</div>
+        </div>
+    {% endfor %}
+
+{% else %}
+    <p>No updates are available.</p>
+{% endif %}
+    </div>
+</div>
+
+
