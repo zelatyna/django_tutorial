@@ -18,9 +18,11 @@ import dotenv
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables from .env if it exists:
+ENV = False
 dotenv_file = os.path.join(BASE_DIR, ".env")
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
+    ENV = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -150,4 +152,5 @@ import django_heroku
 django_heroku.settings(locals())
 
 # Heroku Postgres requires SSL, but SQLite doesn’t need or expect it.
-del DATABASES['default']['OPTIONS']['sslmode']
+if ENV:
+    del DATABASES['default']['OPTIONS']['sslmode']
