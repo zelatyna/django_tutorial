@@ -76,48 +76,6 @@ class CustomUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-#
-# class CustomUser(AbstractBaseUser):
-#     # add additional fields in here
-#
-#     email = models.CharField(max_length=150, unique=True)
-#     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
-#                                  message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-#     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)  # validators should be a list
-#     #phone_number = models.TextField(verbose_name="Full phone  number", blank=False, max_length=50)
-#     is_stuff = models.BooleanField('staff status', default=False)
-#     is_active = models.BooleanField('active', default=True)
-#
-#     USERNAME_FIELD = 'username'
-#     EMAIL_FIELD = 'email'
-#     REQUIRED_FIELDS = ['phone_number']
-#
-#     def __str__(self):
-#         return self.username
-
-
-
-# class AccountManager(BaseUserManager):
-#
-#     def create_user(self, username=None, password=None, **kwargs):
-#         account = self.model(username=username)
-#         account.email = kwargs.get('email')
-#         account.phone_number = kwargs.get('phone_number')
-#         account.set_password(password)
-#         account.is_stuff = False
-#         account.save(using=self._db)
-#
-#         return account
-#
-#     def create_superuser(self, email, name, password=None):
-#
-#         email = self.normalize_email(email)
-#         user = self.model(email=email, name=name)
-#         user.is_stuff = True
-#         user.is_admin = True
-#         user.set_password(password)
-#         user.save(using=self._db)
-
 
 class One_liner(models.Model):
     one_liner_id = models.AutoField(primary_key=True)
