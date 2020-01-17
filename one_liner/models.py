@@ -120,7 +120,7 @@ class CustomUser(AbstractBaseUser):
 
 
 class One_liner(models.Model):
-    one_liner_id = models.IntegerField(primary_key=True)
+    one_liner_id = models.AutoField(primary_key=True)
     one_liner_text = models.TextField('Daily update text')
     pub_date = models.DateField('one_liner date')
     create_date = models.DateTimeField('created at date', auto_now_add=True, blank=True)
