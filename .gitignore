@@ -107,3 +107,4 @@ venv.bak/
 #DB staff
 *.sql
 *.sqlite3
+.env
