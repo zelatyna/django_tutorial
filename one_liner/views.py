@@ -25,18 +25,25 @@ class UserDetail(generics.ListAPIView):
         else:
             raise NotFound()
 
+
+
 class IndexView(generic.ListView):
     template_name = 'one_liner/update_view.html'
     context_object_name = 'latest_question_list'
 
-    def get_queryset(self, column_count=4, max_items=20):
-        """Return the last five published questions."""
-
-        qs = One_liner.objects.order_by('-pub_date')[:max_items]
-
+    def reorder_left_to_right(self, qs, column_count=4):
+        """
+        :param qs: queryset
+        column_count: number of mansonry-columns
+        :return:list of items reordered so that the items will be displayed from left to right rather than from
+        top ot bottom and column by column
+        """
         #reorder the result items to be displayed from left to right in masonry display
-        rows_count = int(max_items/column_count)
-        index_matrix = np.concatenate((np.arange(len(qs)), (-1)*np.ones(max_items - len(qs)))).reshape(rows_count, column_count)
+        #TODO: the items are not displayed evenly through columns. There can be 2 taller items in columns 1
+        # and 4 items in column 2 if that makes the items more evenly spread
+        rows_count = int(len(qs)/column_count)
+        if len(qs)%column_count >0: rows_count+=1
+        index_matrix = np.concatenate((np.arange(len(qs)), (-1)*np.ones(rows_count*column_count - len(qs)))).reshape(rows_count, column_count)
         index_matrix = np.matrix(index_matrix)
         index_list = index_matrix.transpose().reshape(1,rows_count*column_count).tolist()[0]
         index_list = [x for x in index_list if int(x) != -1]
@@ -44,8 +51,12 @@ class IndexView(generic.ListView):
         for id, item in enumerate(qs):
             reordered[index_list.index(id)] = item
 
+    def get_queryset(self, max_items=20):
+        """Return the last five published questions."""
 
-        return reordered
+        qs = One_liner.objects.order_by('-pub_date')[:max_items]
+        # qs = self.reorder_left_to_right(qs)
+        return qs
 
 
 class UpdatesList(mixins.ListModelMixin,
