@@ -132,8 +132,6 @@ STATICFILES_DIRS = (
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# AWS_S3_SECURE_URLS = False       # use http instead of https
-# AWS_QUERYSTRING_AUTH = False     # don't add complex authentication-related query parameters for requests
 #credentials will be loaded through .env file
 # AWS_S3_ACCESS_KEY_ID = '...'     # enter your access key id
 # AWS_S3_SECRET_ACCESS_KEY = '...' # enter your secret access key
@@ -141,11 +139,6 @@ AWS_STORAGE_BUCKET_NAME = 'cheezyapp'
 AWS_S3_REGION_NAME = 'us-west-2'
 AWS_S3_HOST = 's3.us-west-2.amazonaws.com'
 # AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
-# the next monkey patch is necessary if you use dots in the bucket name
-# import ssl
-# if hasattr(ssl, '_create_unverified_context'):
-#    ssl._create_default_https_context = ssl._create_unverified_context
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 # MEDIA_URL = '/images/'
