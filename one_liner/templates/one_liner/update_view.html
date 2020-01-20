@@ -1,31 +1,56 @@
 
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>css masonry left-right ordering w/ jQuery</title>
+    <meta name="description" content="Squmish Jet Ski Rentals">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel='stylesheet' href='styles.css'/>
+
+</head>
+
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'one_liner/style.css' %}">
-
-
-
-
-<div class="wrapper">
-    <div class="title">
-    <h2>Magda and Micheal's digital diary</h2>
-    </div>
-    <div class="masonry" >
-{% if latest_question_list %}
-    {% for question in latest_question_list %}
-         <div class="item">
-                  {% if question.update_image %}
-                    <img src="{{ question.update_image.url }}" border="0" alt="ups">
-                  {% endif %}
-             <div class="date"><h3>{{ question.pub_date }} by {{question.author}}</h3></div>
-             <div class="text">{{ question.one_liner_text }}</div>
-        </div>
-    {% endfor %}
-
-{% else %}
-    <p>No updates are available.</p>
-{% endif %}
-    </div>
+<!--<link rel="stylesheet" type="text/css" href="{% static 'one_liner/styles.css' %}">-->
+<body
+<div class ="title">
+    <h1>Cheesy times of Magda and Micheal</h1>
 </div>
 
+<div class="container">
+    {% if latest_question_list %}
+<!--    {% for question in latest_question_list %}-->
+<!--    <div class="item">-->
+<!--        {% if question.update_image %}-->
+<!--        <img src="{{ question.update_image.url }}" border="0" alt="ups">-->
+<!--        {% endif %}-->
+<!--        <div class="date"><h3>{{ question.pub_date }} by {{question.author}}</h3></div>-->
+<!--        <div class="text">{{ question.one_liner_text }}</div>-->
+<!--    </div>-->
 
+<!--    {% endfor %}-->
+<!--    <span class="break"></span>-->
+<!--    <span class="break"></span>-->
+<!--    <span class="break"></span>-->
+       <section>
+               <!-- jk.data.addCards(latest_question_list);-->
+<!--            loading cards...-->
+        </section>
+    {% else %}
+    <p>No updates are available.</p>
+    {% endif %}
+</div>
+
+   <section>
+<!--             jk.data.addCards({{latest_question_list}});-->
+            loading cards...
+        </section>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='../../static/one_liner/app.js'></script>
+
+</html>
