@@ -76,6 +76,14 @@ class CustomUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+def upload_images_to(instance, filename):
+    import os
+    from django.utils.timezone import now
+    filename_base, filename_ext = os.path.splitext(filename)
+    return 'images/%s%s' % (
+        now().strftime("%Y%m%d%H%M%S"),
+        filename_ext.lower(),
+    )
 
 class One_liner(models.Model):
     one_liner_id = models.AutoField(primary_key=True)
@@ -83,7 +91,7 @@ class One_liner(models.Model):
     pub_date = models.DateField('one_liner date')
     create_date = models.DateTimeField('created at date', auto_now_add=True, blank=True)
     author = models.ForeignKey('CustomUser', related_name='updates', on_delete=models.CASCADE)
-    update_image = models.ImageField(upload_to='images', blank=True, null=True)
+    update_image = models.ImageField(upload_to=upload_images_to,  blank=True, null=True)
     one_liner_count = models.IntegerField(default=0)
 
     def __str__(self):
